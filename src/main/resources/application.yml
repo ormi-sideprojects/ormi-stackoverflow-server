@@ -1,0 +1,11 @@
+spring:
+  application:
+    name: stackorflow
+  jpa:
+    open-in-view: false
+    hibernate:
+      ddl-auto: update
+springdoc:
+  swagger-ui:
+    use-root-path: true
+
