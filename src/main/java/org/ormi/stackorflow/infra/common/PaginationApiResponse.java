@@ -3,6 +3,13 @@ package org.ormi.stackorflow.infra.common;
 import java.util.List;
 import lombok.Getter;
 
+/**
+ * 페이지네이션 응답에 대한 클래스 입니다.
+ * ReactQuery, Infinity Scroll 응답에 호환됩니다.
+ * {@link AbstractResponse<T>}
+ *
+ * @author 남대영
+ */
 @Getter
 public class PaginationApiResponse<T> extends AbstractResponse<List<T>> {
 
