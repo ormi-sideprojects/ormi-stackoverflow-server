@@ -3,14 +3,14 @@ package org.ormi.stackorflow.domain.notification.dto;
 import lombok.AllArgsConstructor;
 
 import java.time.ZonedDateTime;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@AllArgsConstructor
-@NoArgsConstructor
 @Getter
 @Setter
+@Builder
 public final class NotificationResponse {
 
     int id;

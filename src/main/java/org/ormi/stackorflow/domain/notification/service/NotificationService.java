@@ -1,12 +1,11 @@
 package org.ormi.stackorflow.domain.notification.service;
 
 import java.util.List;
-import java.util.Optional;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import org.ormi.stackorflow.domain.notification.dto.NotificationResponse;
-import org.ormi.stackorflow.domain.notification.repository.Notification;
-import org.ormi.stackorflow.domain.notification.repository.NotificationJpaRepository;
+import org.ormi.stackorflow.infra.notification.NotificationEntity;
+import org.ormi.stackorflow.infra.notification.NotificationRepository;
 import org.springframework.stereotype.Service;
 
 
@@ -17,7 +16,7 @@ public class NotificationService {
 
 //    private List<Notification> notifications;
 
-    private NotificationJpaRepository notificationJpaRepository;
+    private NotificationRepository notificationJpaRepository;
 
     // 1. DB에 저장된 것을 1분? 주기로 끌어오는 방법
     // 2. 웹소켓을 사용하여 실시간으로 알림을 끌어오는 방법
@@ -39,7 +38,7 @@ public class NotificationService {
 //        return notificationJpaRepository.findById(receiverId);
 //    }
 
-    public List<Notification> getNotifications(int receiverId) {
+    public List<NotificationResponse> getNotifications(int receiverId) {
         return notificationJpaRepository.findAllById(receiverId);
     }
 
