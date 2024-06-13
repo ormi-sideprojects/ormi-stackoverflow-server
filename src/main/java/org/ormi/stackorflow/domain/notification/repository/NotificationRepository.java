@@ -4,6 +4,7 @@ import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface NotificationRepository extends JpaRepository<Notification, Integer> {
+//    Notification findById(int receiverId);
 
-    Notification findById(int id);
+    List<Notification> findByReceiverId(int receiverId);
 }

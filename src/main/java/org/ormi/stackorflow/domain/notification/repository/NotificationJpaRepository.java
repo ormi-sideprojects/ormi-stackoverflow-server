@@ -3,6 +3,8 @@ package org.ormi.stackorflow.domain.notification.repository;
 import jakarta.validation.Valid;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
+import java.util.List;
+import java.util.Optional;
 import org.ormi.stackorflow.domain.notification.dto.NotificationResponse;
 import org.springframework.stereotype.Repository;
 
@@ -28,8 +30,12 @@ public class NotificationJpaRepository {
         notificationRepository.save(notification);
     }
 
-    public Notification findById(int id) {
-        return notificationRepository.findById(id);
+//    public Notification findById(int receiverId) {
+//        return notificationRepository.findById(receiverId);
+//    }
+
+    public List<Notification> findAllById(int receiverId) {
+        return notificationRepository.findByReceiverId(receiverId);
     }
 
     public void deleteById(long id) {

@@ -1,16 +1,12 @@
 package org.ormi.stackorflow.domain.notification.service;
 
-import jakarta.transaction.Transactional;
-import java.time.LocalDate;
-import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import org.ormi.stackorflow.domain.notification.dto.NotificationResponse;
 import org.ormi.stackorflow.domain.notification.repository.Notification;
 import org.ormi.stackorflow.domain.notification.repository.NotificationJpaRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Service;
 
 
@@ -39,8 +35,12 @@ public class NotificationService {
 
     // 알림을 불러오는 메소드
 
-    public Notification getNotification(int id) {
-        return notificationJpaRepository.findById(id);
+//    public Notification getNotification(int receiverId) {
+//        return notificationJpaRepository.findById(receiverId);
+//    }
+
+    public List<Notification> getNotifications(int receiverId) {
+        return notificationJpaRepository.findAllById(receiverId);
     }
 
     // 알림 삭제 메소드

@@ -1,5 +1,6 @@
 package org.ormi.stackorflow.domain.notification.controller;
 
+import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.ormi.stackorflow.domain.notification.dto.NotificationResponse;
 import org.ormi.stackorflow.domain.notification.repository.Notification;
@@ -30,10 +31,10 @@ final class NotificationController {
         return Responses.created("알림 추가 성공!");
     }
 
-    //     알림 리스트를 불러오는 기능
-//    @GetMapping
-//    public final void findNotification(@RequestParam int id) {
-//        return;
-//    }
+    // 알림 리스트를 불러오는 기능(추후 인증객체를 통하는 방식으로 수정해야함)
+    @GetMapping("/test")
+    public final <U> Responses<List<Notification>> findNotification(@RequestParam int receiverId) {
+        return Responses.created("알림 호출 성공", notificationService.getNotifications(receiverId));
+    }
 
 }
