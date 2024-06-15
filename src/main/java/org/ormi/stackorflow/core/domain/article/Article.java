@@ -2,6 +2,7 @@ package org.ormi.stackorflow.core.domain.article;
 
 import lombok.Getter;
 import org.ormi.stackorflow.core.domain.common.Provider;
+import org.ormi.stackorflow.core.domain.common.Timestamps;
 
 @Getter
 public class Article {
@@ -12,11 +13,12 @@ public class Article {
   private final String discordChannelName;
   private final ArticleType type;
   private final ArticleMeToo meToo;
-  private final ArticleComment comment;
-
+  private final ArticleCommentSummary comment;
+  private final Timestamps timestamps;
 
   public Article(long id, Provider provider, String nickname, String content,
-      String discordChannelName, ArticleType type, ArticleMeToo meToo, ArticleComment comment) {
+      String discordChannelName, ArticleType type, ArticleMeToo meToo, ArticleCommentSummary comment,
+      Timestamps timestamps) {
     this.id = id;
     this.provider = provider;
     this.nickname = nickname;
@@ -25,5 +27,6 @@ public class Article {
     this.type = type;
     this.meToo = meToo;
     this.comment = comment;
+    this.timestamps = timestamps;
   }
 }

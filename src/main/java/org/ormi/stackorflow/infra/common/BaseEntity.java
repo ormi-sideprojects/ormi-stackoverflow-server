@@ -8,7 +8,7 @@ import org.hibernate.annotations.UpdateTimestamp;
 @MappedSuperclass
 abstract public class BaseEntity {
   @CreationTimestamp
-  private ZonedDateTime createdAt;
+  protected ZonedDateTime createdAt;
   @UpdateTimestamp
-  private ZonedDateTime updatedAt;
+  protected ZonedDateTime updatedAt;
 }
