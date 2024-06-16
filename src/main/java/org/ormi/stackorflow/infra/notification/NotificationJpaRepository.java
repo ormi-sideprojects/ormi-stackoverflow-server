@@ -7,4 +7,5 @@ interface NotificationJpaRepository extends JpaRepository<NotificationEntity, In
 //    Notification findById(int receiverId);
 
     List<NotificationEntity> findByReceiverId(int receiverId);
+
 }

@@ -3,9 +3,11 @@ package org.ormi.stackorflow.domain.notification.service;
 import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import org.modelmapper.ModelMapper;
 import org.ormi.stackorflow.domain.notification.dto.NotificationResponse;
-import org.ormi.stackorflow.infra.notification.NotificationEntity;
 import org.ormi.stackorflow.infra.notification.NotificationRepository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 
@@ -14,36 +16,34 @@ import org.springframework.stereotype.Service;
 @Getter
 public class NotificationService {
 
-//    private List<Notification> notifications;
-
-    private NotificationRepository notificationJpaRepository;
-
-    // 1. DB에 저장된 것을 1분? 주기로 끌어오는 방법
-    // 2. 웹소켓을 사용하여 실시간으로 알림을 끌어오는 방법
-
-    // 알림 추가 메소드
-//    public void addNotification(Notification notification) {
-//
-//        saveNotifications(notification);
-//    }
+    private final NotificationRepository notificationJpaRepository;
+    private final ModelMapper modelMapper;
+    private final Logger logger = LoggerFactory.getLogger(getClass());
 
     // 알림 저장 메소드
     public void saveNotifications(NotificationResponse notificationResponse) {
+        if (notificationResponse.getDomain().equals("article")) {
+            notificationResponse.setReceiverId(0);
+        }
+
         notificationJpaRepository.save(notificationResponse);
     }
 
-    // 알림을 불러오는 메소드
+    public List<NotificationResponse> getNotifications(int receiverId, int type) {
+        // 누군가 게시글을 작성했을 때
+        if (type == 1) {
+            return notificationJpaRepository.findAllById(0);
+        }
 
-//    public Notification getNotification(int receiverId) {
-//        return notificationJpaRepository.findById(receiverId);
-//    }
-
-    public List<NotificationResponse> getNotifications(int receiverId) {
-        return notificationJpaRepository.findAllById(receiverId);
+        // 누군가 내 질문에 답변글을 남겼을 때
+        if (type == 2) {
+            return notificationJpaRepository.findAllById(receiverId);
+        }
+        return null;
     }
 
     // 알림 삭제 메소드
-    private void deleteNotice(long id) {
-        notificationJpaRepository.deleteById(id);
-    }
+//    private void deleteNotice(long id) {
+//        notificationJpaRepository.deleteById(id);
+//    }
 }

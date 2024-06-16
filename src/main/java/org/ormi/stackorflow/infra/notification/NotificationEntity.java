@@ -8,15 +8,17 @@ import jakarta.persistence.Table;
 import java.time.ZonedDateTime;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 
 @Entity
 @Getter
+@Setter
+@ToString
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
-@Builder
 @Table(name = "notifications")
 public final class NotificationEntity {
 
@@ -26,20 +28,7 @@ public final class NotificationEntity {
     int receiverId;
     int senderId;
     int target; // original article id
-    String original; // comment or article
+    String domain; // comment or article
     String message;
     ZonedDateTime createdAt;
-
-    @Override
-    public String toString() {
-        return "NotificationEntity{" +
-                "id=" + id +
-                ", receiverId=" + receiverId +
-                ", senderId=" + senderId +
-                ", target='" + target + '\'' +
-                ", original='" + original + '\'' +
-                ", message='" + message + '\'' +
-                ", createdAt=" + createdAt +
-                '}';
-    }
 }

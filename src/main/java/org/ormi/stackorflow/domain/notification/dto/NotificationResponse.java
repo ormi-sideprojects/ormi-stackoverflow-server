@@ -7,19 +7,19 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.ormi.stackorflow.infra.notification.NotificationEntity;
 
 @Getter
 @Setter
-@Builder
 public final class NotificationResponse {
 
     int id;
     int receiverId;
-    int SenderId;
+    int senderId;
     int target; // original article id
-    String original; // comment or article
+    String domain; // comment or article
     String message;
-    ZonedDateTime createdAt;
+    ZonedDateTime createdAt = ZonedDateTime.now();
 
 }
 
