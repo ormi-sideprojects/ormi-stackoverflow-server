@@ -6,6 +6,7 @@ import org.ormi.stackorflow.core.domain.article.ArticleService;
 import org.ormi.stackorflow.core.domain.article.Comment;
 import org.ormi.stackorflow.core.domain.common.Provider;
 import org.ormi.stackorflow.infra.common.Responses;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -46,5 +47,17 @@ public class ArticleController {
       @RequestBody CreateCommentRequest request) {
     service.comment(request.toDomain(provider, id));
     return Responses.created("댓글 작성에 성공했습니다.");
+  }
+
+  @PostMapping("{articleId}/me-toos")
+  public Responses<Void> addMeToo(Provider provider, @PathVariable("articleId") long id) {
+    service.addMeToo(provider, id);
+    return Responses.created("나도 궁금해요가 추가되었습니다.");
+  }
+
+  @DeleteMapping("{articleId}/me-toos")
+  public Responses<Void> deleteMeToo(Provider provider, @PathVariable("articleId") long id) {
+    service.deleteMeToo(provider, id);
+    return Responses.ok("나도 궁금해요가 제거되었습니다.");
   }
 }

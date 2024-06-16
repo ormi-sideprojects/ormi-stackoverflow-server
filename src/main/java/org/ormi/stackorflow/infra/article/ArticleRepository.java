@@ -6,6 +6,7 @@ import org.ormi.stackorflow.core.domain.article.Article;
 import org.ormi.stackorflow.core.domain.article.Comment;
 import org.ormi.stackorflow.core.domain.article.CreateArticle;
 import org.ormi.stackorflow.core.domain.article.CreateComment;
+import org.ormi.stackorflow.core.domain.common.Provider;
 import org.springframework.stereotype.Repository;
 
 @Repository
@@ -15,6 +16,7 @@ public class ArticleRepository implements
 
   private final ArticleJpaRepository jpaRepository;
   private final ArticleCommentJpaRepository commentJpaRepository;
+  private final ArticleMeTooJpaRepository meTooJpaRepository;
 
   @Override
   public List<Article> findAll() {
@@ -46,6 +48,22 @@ public class ArticleRepository implements
   public List<Comment> findArticleComment(Article article) {
     return commentJpaRepository.findByArticleId(article.getId()).stream()
         .map(ArticleCommentEntity::toDomain).toList();
+  }
+
+  @Override
+  public void addMeToo(Article article, Provider provider) {
+    ArticleMeTooEntity created = new ArticleMeTooEntity(article, provider);
+    meTooJpaRepository.save(created);
+  }
+
+  @Override
+  public void deleteMeToo(Article article, Provider provider) {
+    meTooJpaRepository.deleteByArticleIdAndMemberId(article.getId(), provider.getMemberId());
+  }
+
+  @Override
+  public boolean isExistMeToo(Article article, Provider provider) {
+    return meTooJpaRepository.existsByArticleIdAndMemberId(article.getId(), provider.getMemberId());
   }
 
 
