@@ -4,7 +4,7 @@ import java.util.List;
 import org.ormi.stackorflow.core.domain.common.Provider;
 
 public interface ArticleRepository {
-  List<Article> findAll();
+  List<Article> findAll(Provider provider);
   Article findOne(long id);
   void create(CreateArticle article);
   void comment(Article article, CreateComment comment);

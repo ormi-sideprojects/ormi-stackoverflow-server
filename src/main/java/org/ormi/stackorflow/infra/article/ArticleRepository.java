@@ -17,11 +17,12 @@ public class ArticleRepository implements
   private final ArticleJpaRepository jpaRepository;
   private final ArticleCommentJpaRepository commentJpaRepository;
   private final ArticleMeTooJpaRepository meTooJpaRepository;
+  private final ArticleQueryDslRepository queryDslRepository;
 
   @Override
-  public List<Article> findAll() {
-    List<ArticleEntity> entities = jpaRepository.findAll();
-    return entities.stream().map(ArticleEntity::toDomain).toList();
+  public List<Article> findAll(Provider provider) {
+    List<Article> articles = queryDslRepository.getHomeThreadList(provider);
+    return articles;
   }
 
   @Override

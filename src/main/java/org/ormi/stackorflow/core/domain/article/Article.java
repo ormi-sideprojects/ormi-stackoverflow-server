@@ -1,5 +1,6 @@
 package org.ormi.stackorflow.core.domain.article;
 
+import com.querydsl.core.annotations.QueryProjection;
 import lombok.Getter;
 import org.ormi.stackorflow.core.domain.common.Provider;
 import org.ormi.stackorflow.core.domain.common.Timestamps;
@@ -13,11 +14,11 @@ public class Article {
   private final String discordChannelName;
   private final ArticleType type;
   private final ArticleMeToo meToo;
-  private final ArticleCommentSummary comment;
+  private final int commentNumber;
   private final Timestamps timestamps;
-
+  @QueryProjection
   public Article(long id, Provider provider, String nickname, String content,
-      String discordChannelName, ArticleType type, ArticleMeToo meToo, ArticleCommentSummary comment,
+      String discordChannelName, ArticleType type, ArticleMeToo meToo, int commentNumber,
       Timestamps timestamps) {
     this.id = id;
     this.provider = provider;
@@ -26,7 +27,7 @@ public class Article {
     this.discordChannelName = discordChannelName;
     this.type = type;
     this.meToo = meToo;
-    this.comment = comment;
+    this.commentNumber = commentNumber;
     this.timestamps = timestamps;
   }
 }

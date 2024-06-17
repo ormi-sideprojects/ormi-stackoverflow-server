@@ -15,7 +15,8 @@ record ArticleHomeThreadItemResponse(long id, UUID writerId, String writerNickna
   static ArticleHomeThreadItemResponse of(Article article) {
     return new ArticleHomeThreadItemResponse(article.getId(), article.getProvider().getMemberId(),
         article.getNickname(), article.getContent(), article.getDiscordChannelName(),
-        article.getType(), null, null, null, article.getTimestamps().createdAt(),
+        article.getType(), article.getMeToo().number(), article.getMeToo().isChecked(),
+        article.getCommentNumber(), article.getTimestamps().createdAt(),
         article.getTimestamps().updatedAt());
   }
 }

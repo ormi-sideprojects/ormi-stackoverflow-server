@@ -13,8 +13,8 @@ public class ArticleService {
     repository.create(article);
   }
 
-  public List<Article> findAll() {
-    return repository.findAll();
+  public List<Article> findAll(Provider provider) {
+    return repository.findAll(provider);
   }
   public void comment(CreateComment comment){
     Article article = getById(comment.articleId());

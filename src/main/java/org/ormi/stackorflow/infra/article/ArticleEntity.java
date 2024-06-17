@@ -49,7 +49,7 @@ public class ArticleEntity extends BaseEntity {
 
   Article toDomain() {
     return new Article(id, new Provider(memberId), content, password, discordChannelName, type,
-        null, null, new Timestamps(createdAt, updatedAt));
+        null, 0, new Timestamps(createdAt, updatedAt));
   }
 
   static ArticleEntity of(CreateArticle article) {

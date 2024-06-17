@@ -22,8 +22,8 @@ public class ArticleController {
   private final ArticleService service;
 
   @GetMapping
-  public Responses<List<ArticleHomeThreadItemResponse>> findAll() {
-    List<ArticleHomeThreadItemResponse> result = service.findAll().stream()
+  public Responses<List<ArticleHomeThreadItemResponse>> findAll(Provider provider) {
+    List<ArticleHomeThreadItemResponse> result = service.findAll(provider).stream()
         .map(ArticleHomeThreadItemResponse::of).toList();
     return Responses.ok("조회에 성공했습니다.", result);
   }
