@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
 import org.ormi.stackorflow.core.domain.article.Article;
 import org.ormi.stackorflow.core.domain.article.ArticleType;
 import org.ormi.stackorflow.core.domain.article.CreateArticle;
-import org.ormi.stackorflow.core.domain.common.Provider;
+import org.ormi.stackorflow.core.domain.common.auth.Provider;
 import org.ormi.stackorflow.core.domain.common.Timestamps;
 import org.ormi.stackorflow.infra.common.BaseEntity;
 

@@ -11,7 +11,7 @@ import java.util.UUID;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 import org.ormi.stackorflow.core.domain.article.Article;
-import org.ormi.stackorflow.core.domain.common.Provider;
+import org.ormi.stackorflow.core.domain.common.auth.Provider;
 import org.ormi.stackorflow.infra.common.BaseEntity;
 
 @Entity

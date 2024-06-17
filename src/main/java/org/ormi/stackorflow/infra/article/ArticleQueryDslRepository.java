@@ -12,7 +12,7 @@ import lombok.RequiredArgsConstructor;
 import org.ormi.stackorflow.core.domain.article.Article;
 import org.ormi.stackorflow.core.domain.article.QArticle;
 import org.ormi.stackorflow.core.domain.article.QArticleMeToo;
-import org.ormi.stackorflow.core.domain.common.Provider;
+import org.ormi.stackorflow.core.domain.common.auth.Provider;
 import org.ormi.stackorflow.core.domain.common.QProvider;
 import org.ormi.stackorflow.core.domain.common.QTimestamps;
 import org.springframework.stereotype.Repository;

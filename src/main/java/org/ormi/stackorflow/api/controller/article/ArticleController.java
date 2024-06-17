@@ -4,7 +4,7 @@ import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.ormi.stackorflow.core.domain.article.ArticleService;
 import org.ormi.stackorflow.core.domain.article.Comment;
-import org.ormi.stackorflow.core.domain.common.Provider;
+import org.ormi.stackorflow.core.domain.common.auth.Provider;
 import org.ormi.stackorflow.infra.common.Responses;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -32,6 +32,12 @@ public class ArticleController {
   public Responses<Void> post(Provider provider, @RequestBody CreateArticleRequest request) {
     service.createArticle(request.toDomain(provider));
     return Responses.created("포스팅에 성공했습니다.");
+  }
+
+  @DeleteMapping("{articleId}")
+  public Responses<Void> delete(Provider provider, @PathVariable("articleId") long id) {
+    service.delete(provider, id);
+    return Responses.ok("게시글 삭제에 성공했습니다.");
   }
 
   @GetMapping("{articleId}/comments")

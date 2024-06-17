@@ -6,7 +6,7 @@ import org.ormi.stackorflow.core.domain.article.Article;
 import org.ormi.stackorflow.core.domain.article.Comment;
 import org.ormi.stackorflow.core.domain.article.CreateArticle;
 import org.ormi.stackorflow.core.domain.article.CreateComment;
-import org.ormi.stackorflow.core.domain.common.Provider;
+import org.ormi.stackorflow.core.domain.common.auth.Provider;
 import org.springframework.stereotype.Repository;
 
 @Repository
@@ -37,6 +37,11 @@ public class ArticleRepository implements
   @Override
   public void create(CreateArticle article) {
     jpaRepository.save(ArticleEntity.of(article));
+  }
+
+  @Override
+  public void delete(Article article) {
+    jpaRepository.deleteById(article.getId());
   }
 
   @Override

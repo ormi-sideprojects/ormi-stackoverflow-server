@@ -2,7 +2,7 @@ package org.ormi.stackorflow.core.domain.article;
 
 import java.util.List;
 import lombok.RequiredArgsConstructor;
-import org.ormi.stackorflow.core.domain.common.Provider;
+import org.ormi.stackorflow.core.domain.common.auth.Provider;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -21,9 +21,16 @@ public class ArticleService {
     repository.comment(article, comment);
   }
   public List<Comment> findArticleComments(long articleId) {
-    Article article = repository.findOne(articleId);
-    if(article == null) throw new ArticleNotFoundException();
+    Article article = getById(articleId);
     return repository.findArticleComment(article);
+  }
+
+  public void delete(Provider provider, long articleId) {
+    Article article = getById(articleId);
+    if(!article.isOwner(provider)) {
+      throw new ArticleForbiddenException();
+    }
+    repository.delete(article);
   }
 
 

@@ -14,14 +14,14 @@ import lombok.NoArgsConstructor;
 import org.ormi.stackorflow.core.domain.article.Article;
 import org.ormi.stackorflow.core.domain.article.Comment;
 import org.ormi.stackorflow.core.domain.article.CreateComment;
-import org.ormi.stackorflow.core.domain.common.Provider;
+import org.ormi.stackorflow.core.domain.common.auth.Provider;
 import org.ormi.stackorflow.core.domain.common.Timestamps;
 import org.ormi.stackorflow.infra.common.BaseEntity;
 
 @Entity
 @Table(name = "comments")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-final class ArticleCommentEntity extends BaseEntity {
+class ArticleCommentEntity extends BaseEntity {
 
   @Id
   @GeneratedValue
@@ -42,6 +42,6 @@ final class ArticleCommentEntity extends BaseEntity {
 
   Comment toDomain() {
     return new Comment(id, article.getId(), new Provider(memberId), null, content,
-        new Timestamps(createdAt, updatedAt), false, 0);
+        new Timestamps(createdAt, updatedAt), false, 0, false);
   }
 }

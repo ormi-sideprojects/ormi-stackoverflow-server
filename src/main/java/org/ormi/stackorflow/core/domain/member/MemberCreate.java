@@ -3,7 +3,7 @@ package org.ormi.stackorflow.core.domain.member;
 
 import lombok.Builder;
 import lombok.Getter;
-import org.ormi.stackorflow.core.domain.common.RoleType;
+import org.ormi.stackorflow.core.domain.common.auth.RoleType;
 
 @Getter
 public class MemberCreate {
