@@ -1,7 +1,7 @@
 package org.ormi.stackorflow.infra.notification;
 
-import jakarta.validation.Valid;
 import java.util.List;
+import java.util.UUID;
 import java.util.stream.Collectors;
 import org.modelmapper.ModelMapper;
 import org.ormi.stackorflow.domain.notification.dto.NotificationResponse;
@@ -18,13 +18,13 @@ public class NotificationRepository {
         this.modelMapper = modelMapper;
     }
 
-    public void save(@Valid NotificationResponse notificationResponse) {
+    public void save(NotificationResponse notificationResponse) {
         NotificationEntity notificationEntity = modelMapper.map(notificationResponse, NotificationEntity.class);
 
         notificationJpaRepository.save(notificationEntity);
     }
 
-    public List<NotificationResponse> findAllById(int receiverId) {
+    public List<NotificationResponse> findAllById(UUID receiverId) {
 
         List<NotificationEntity> notificationEntities =
                 notificationJpaRepository.findByReceiverId(receiverId);

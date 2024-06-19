@@ -1,11 +1,11 @@
 package org.ormi.stackorflow.infra.notification;
 
 import java.util.List;
+import java.util.UUID;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-interface NotificationJpaRepository extends JpaRepository<NotificationEntity, Integer> {
-//    Notification findById(int receiverId);
+interface NotificationJpaRepository extends JpaRepository<NotificationEntity, Long> {
 
-    List<NotificationEntity> findByReceiverId(int receiverId);
+    List<NotificationEntity> findByReceiverId(UUID receiverId);
 
 }
