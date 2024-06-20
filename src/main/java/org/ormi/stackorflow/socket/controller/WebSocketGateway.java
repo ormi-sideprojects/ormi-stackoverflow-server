@@ -3,6 +3,7 @@ package org.ormi.stackorflow.socket.controller;
 import lombok.RequiredArgsConstructor;
 import org.ormi.stackorflow.socket.controller.dto.HandleArticleResponse;
 import org.ormi.stackorflow.socket.controller.dto.HandleCommentResponse;
+import org.ormi.stackorflow.socket.controller.dto.HandleNotificationResponse;
 import org.springframework.messaging.simp.SimpMessageSendingOperations;
 import org.springframework.stereotype.Controller;
 
@@ -25,5 +26,10 @@ public class WebSocketGateway {
   // 게시글 내의 댓글 응답 이벤트
   public void handleComment(int articleId, HandleCommentResponse dto) {
     simpMessageSendingOperations.convertAndSend("/sub/articles/" + articleId + "/comments", dto);
+  }
+
+  // 알림 응답 이벤트
+  public void handleNotification(HandleNotificationResponse dto) {
+    simpMessageSendingOperations.convertAndSend("/sub/notifications", dto);
   }
 }
