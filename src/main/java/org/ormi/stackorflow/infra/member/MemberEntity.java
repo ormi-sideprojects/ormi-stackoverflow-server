@@ -4,6 +4,7 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -21,18 +22,18 @@ import org.ormi.stackorflow.infra.staff.StaffEntity;
 public class MemberEntity {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "member_id")
-	private Long id;
-
-	@Column(name = "session_id")
-	private String sessionId;
+	private String id;
 
 	@Enumerated(EnumType.STRING)
 	@Column(name = "role")
 	private RoleType role;
 
-	@OneToOne(mappedBy = "memberEntity")
+	@OneToOne(mappedBy = "memberEntity", fetch = FetchType.LAZY)
 	private StaffEntity staffEntity;
 
+	public void updateRole(RoleType role) {
+		this.role = role;
+	}
 }
+

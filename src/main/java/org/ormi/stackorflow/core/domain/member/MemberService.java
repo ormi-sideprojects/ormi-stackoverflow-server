@@ -15,22 +15,16 @@ public class MemberService {
 
 	private final MemberRepository memberRepository;
 
-	public boolean existsBySessionId(String sessionId) {
-		return memberRepository.findBySessionId(sessionId).isPresent();
-	}
-
 	@Transactional
-	public MemberEntity createSession(String sessionId) {
-		MemberEntity memberEntity = new MemberEntity();
-		memberEntity.setSessionId(sessionId);
-		memberEntity.setRole(RoleType.ANONYMOUS);
+	public MemberEntity findOrCreateMember(String cookieValue) {
 
-		return memberRepository.save(memberEntity);
+		return memberRepository.findById(cookieValue).orElseGet(() -> {
+			MemberCreate memberCreate = MemberCreate.builder()
+				.id(cookieValue)
+				.role(RoleType.ANONYMOUS)
+				.build();
+			return memberRepository.save(memberCreate.toEntity());
+		});
 	}
 
-	@Transactional
-	public MemberEntity getBySessionId(String sessionId) {
-		return memberRepository.findBySessionId(sessionId)
-			.orElseThrow(() -> new ResourceNotFoundException("sessionId", sessionId));
-	}
 }

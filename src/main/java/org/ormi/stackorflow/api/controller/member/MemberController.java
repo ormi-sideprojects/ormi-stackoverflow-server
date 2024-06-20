@@ -1,8 +1,10 @@
 package org.ormi.stackorflow.api.controller.member;
 
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.ormi.stackorflow.api.controller.member.response.MemberResponse;
+import org.ormi.stackorflow.core.domain.common.CookieUtil;
 import org.ormi.stackorflow.core.domain.member.MemberService;
 import org.ormi.stackorflow.infra.common.Responses;
 import org.ormi.stackorflow.infra.member.MemberEntity;
@@ -18,27 +20,13 @@ public class MemberController {
 	private final MemberService memberService;
 
 	@GetMapping("/check-session")
-	public Responses<MemberResponse> checkSession(HttpSession httpSession) {
+	public Responses<MemberResponse> checkSession(HttpServletRequest request) {
 
-		// 넘어온 세션 값이 DB에 존재한다면, 그냥 가져오고 없으면 insert
-		String sessionId = httpSession.getId();
+		// 넘어온 쿠키 값이 DB에 존재하면 가져오고 없으면 insert
+		String anonymousMemberId = CookieUtil.getCookieValue(request, CookieUtil.ANONYMOUS_MEMBER_COOKIE_NAME);
 
-		if (!memberService.existsBySessionId(sessionId)) {
-			// 여기서 없으면 insert
-			return Responses.ok("사용자 세션 발급 성공", toMemberResponse(memberService.createSession(sessionId)));
-		}
-
-		// 있는 경우에 대한 로직
-		return Responses.ok("사용자 세션 가져오기 성공", toMemberResponse(memberService.getBySessionId(sessionId)));
-	}
-
-	public MemberResponse toMemberResponse(MemberEntity memberEntity) {
-		MemberResponse memberResponse = new MemberResponse();
-		memberResponse.setId(memberEntity.getId());
-		memberResponse.setSessionId(memberEntity.getSessionId());
-		memberResponse.setCode(memberEntity.getRole());
-
-		return memberResponse;
+		return Responses.ok("사용자 쿠키 등록 성공", MemberResponse.fromEntity(memberService.findOrCreateMember(anonymousMemberId)));
 	}
 
 }
+
