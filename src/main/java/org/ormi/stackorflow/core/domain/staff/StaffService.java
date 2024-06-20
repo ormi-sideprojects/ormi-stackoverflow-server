@@ -23,11 +23,10 @@ public class StaffService {
 	}
 
 	@Transactional
-	public StaffEntity update(StaffEntity staffEntity, String sessionId) {
+	public StaffEntity update(StaffEntity staffEntity, String cookieValue) {
 
-		MemberEntity memberEntity = memberRepository.findBySessionId(sessionId).get();
+		MemberEntity memberEntity = memberRepository.findById(cookieValue).get();
 		staffEntity.setMemberEntity(memberEntity);
-		staffEntity.updateMemberRole();
 
 		return staffEntity;
 	}
