@@ -2,6 +2,8 @@ package org.ormi.stackorflow.infra.modules.discord;
 
 import discord4j.core.DiscordClientBuilder;
 import discord4j.core.GatewayDiscordClient;
+import discord4j.core.event.domain.Event;
+import java.util.Set;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -9,10 +11,22 @@ import org.springframework.context.annotation.Configuration;
 public class DiscordConfiguration {
 
   @Bean
-  public GatewayDiscordClient discordClient(DiscordBotToken discordBotToken) {
-    return DiscordClientBuilder.create(discordBotToken.getBotToken())
+  public <T extends Event> GatewayDiscordClient discordClient(
+      DiscordBotToken discordBotToken,
+      Set<DiscordListener<T>> discordListeners
+  ) {
+    GatewayDiscordClient discordClient = DiscordClientBuilder.create(discordBotToken.getBotToken())
         .build()
         .login()
         .block();
+
+    discordListeners.forEach(listener -> {
+      discordClient.on(listener.type())
+          .flatMap(listener::execute)
+          .onErrorResume(listener::handleError)
+          .subscribe();
+    });
+
+    return discordClient;
   }
 }
