@@ -24,7 +24,7 @@ public class NotificationRepository {
         notificationJpaRepository.save(notificationEntity);
     }
 
-    public List<NotificationResponse> findAllById(UUID receiverId) {
+    public List<NotificationResponse> findByReceiverId(UUID receiverId) {
 
         List<NotificationEntity> notificationEntities =
                 notificationJpaRepository.findByReceiverId(receiverId);

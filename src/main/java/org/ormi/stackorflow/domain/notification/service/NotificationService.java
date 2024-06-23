@@ -7,9 +7,9 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import org.modelmapper.ModelMapper;
 import org.ormi.stackorflow.domain.notification.dto.NotificationResponse;
+import org.ormi.stackorflow.domain.socket.controller.WebSocketGateway;
 import org.ormi.stackorflow.infra.notification.NotificationRepository;
 import org.springframework.stereotype.Service;
-
 
 @Service
 @AllArgsConstructor
@@ -18,28 +18,28 @@ public class NotificationService {
 
     private final NotificationRepository notificationRepository;
     private final ModelMapper modelMapper;
+    private final WebSocketGateway webSocketGateway;
 
     // 실시간 활동 알림 생성
-    public NotificationResponse createRealTimeActivityNotification(String senderId, long articleId) {
+    public void createRealTimeActivityNotification(UUID senderId, long articleId, String staffNickname) {
         NotificationResponse dto = NotificationResponse.builder()
                 .senderId(senderId)
-                .receiverId("000000-0000-0000-0000-000000000000")
-                .message(senderId + "님이 새로운 글을 올렸어요!")
+                .receiverId(null)
+                .message(staffNickname + "님이 새로운 글을 올렸어요!")
                 .domain("article")
                 .target(articleId)
                 .createdAt(ZonedDateTime.now())
                 .build();
 
-
-        return dto; // <- 이 코드는 지워야됨
+        webSocketGateway.handleNotification(dto);
     }
 
     // 내 질문에 대한 댓글 알림 생성
-    public NotificationResponse createMyArticleCommentNotification(String senderId, String receiverId, long commentId) {
+    public void createMyArticleCommentNotification(UUID senderId, UUID receiverId, long commentId, String staffNickname) {
         NotificationResponse dto = NotificationResponse.builder()
                 .senderId(senderId)
                 .receiverId(receiverId)
-                .message(receiverId + "님의 질문에 " + senderId + "님이 새로운 글을 올렸어요!")
+                .message("당신의 질문에 " + staffNickname + "님이 답변했습니다.")
                 .domain("comment")
                 .target(commentId)
                 .createdAt(ZonedDateTime.now())
@@ -47,14 +47,12 @@ public class NotificationService {
 
         saveMyArticleCommentNotification(dto);
 
-        // 소켓 호출 코드 들어갈 자리
-
-        return dto; // <- 이 코드는 지워야됨
+        webSocketGateway.handleNotification(dto);
     }
 
     // 내 질문에 대한 댓글 알림 조회
     public List<NotificationResponse> findMyArticleNotifications(UUID receiverId) {
-        return notificationRepository.findAllById(receiverId);
+        return notificationRepository.findByReceiverId(receiverId);
     }
 
     // 내 질문에 대한 댓글 알림 저장

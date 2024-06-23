@@ -1,5 +1,6 @@
 package org.ormi.stackorflow.infra.notification;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -31,5 +32,6 @@ public final class NotificationEntity {
     long target; // original article id
     String domain; // comment or article
     String message;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss", timezone = "Asia/Seoul")
     ZonedDateTime createdAt;
 }
