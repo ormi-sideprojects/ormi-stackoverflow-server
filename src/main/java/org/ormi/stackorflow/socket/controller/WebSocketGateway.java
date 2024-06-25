@@ -30,6 +30,11 @@ public class WebSocketGateway {
 
   // 알림 응답 이벤트
   public void handleNotification(HandleNotificationResponse dto) {
-    simpMessageSendingOperations.convertAndSend("/sub/notifications", dto);
+    if(dto.getReceiverId().isEmpty()) {
+      simpMessageSendingOperations.convertAndSend("/sub/notifications", dto);
+    } else {
+      simpMessageSendingOperations.convertAndSend("/sub/notifications/" + dto.getReceiverId().get(), dto);
+    }
+
   }
 }
