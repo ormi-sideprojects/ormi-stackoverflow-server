@@ -3,6 +3,7 @@ package org.ormi.stackorflow.infra.modules.discord;
 import discord4j.core.DiscordClientBuilder;
 import discord4j.core.GatewayDiscordClient;
 import discord4j.core.event.domain.Event;
+import java.util.Objects;
 import java.util.Set;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -19,6 +20,7 @@ public class DiscordConfiguration {
         .build()
         .login()
         .block();
+    Objects.requireNonNull(discordClient, "discordClient");
 
     discordListeners.forEach(listener -> {
       discordClient.on(listener.type())
