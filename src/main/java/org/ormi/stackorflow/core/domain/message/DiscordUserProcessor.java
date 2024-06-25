@@ -15,7 +15,8 @@ public class DiscordUserProcessor {
   }
 
   public void saveIfNotExists(DiscordDomainUser user) {
-    Optional<DiscordUserEntity> discordUserEntity = discordUserJpaRepository.findById(user.discordId());
+    Optional<DiscordUserEntity> discordUserEntity =
+        discordUserJpaRepository.findByDiscordOauthUserId(user.discordId());
     if (discordUserEntity.isPresent()) {
       return;
     }

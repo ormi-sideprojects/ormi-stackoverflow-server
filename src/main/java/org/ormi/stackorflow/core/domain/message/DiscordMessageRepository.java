@@ -4,5 +4,7 @@ import java.util.List;
 
 public interface DiscordMessageRepository {
 
-  List<Message> findByMessageId(long messageId);
+  Message findByMessageId(long messageId);
+
+  List<Message> findByDiscordUserId(long discordUserId);
 }

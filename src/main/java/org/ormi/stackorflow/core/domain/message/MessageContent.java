@@ -5,4 +5,7 @@ public record MessageContent(
     String content
 ) {
 
+  public static MessageContent of(long messageId, String content) {
+    return new MessageContent(messageId, content);
+  }
 }

@@ -23,7 +23,7 @@ public class DiscordUserEntity {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private long id;
 
-  @Column(name = "oauth_user_id", updatable = false, unique = true)
+  @Column(updatable = false, unique = true)
   private long discordOauthUserId;
 
   @NotNull
