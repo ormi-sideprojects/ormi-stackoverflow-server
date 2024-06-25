@@ -1,6 +1,5 @@
 package org.ormi.stackorflow.infra.modules.discord;
 
-import discord4j.core.object.entity.channel.Channel;
 import discord4j.discordjson.json.ChannelData;
 
 public record DiscordChannel(
