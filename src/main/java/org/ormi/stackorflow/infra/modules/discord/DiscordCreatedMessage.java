@@ -22,7 +22,7 @@ public record DiscordCreatedMessage(
       boolean isImageFile
   ) {
 
-    public static DiscordMessageAttach of(Attachment attachment) {
+    private static DiscordMessageAttach of(Attachment attachment) {
       String filename = attachment.getFilename();
 
       return new DiscordMessageAttach(

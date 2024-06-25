@@ -6,7 +6,7 @@ public record DiscordMessageCreatedEvent(
     DiscordMember discordMember
 ) {
 
-  public static DiscordMessageCreatedEvent from(
+  static DiscordMessageCreatedEvent from(
       DiscordChannel channel,
       DiscordCreatedMessage message,
       DiscordMember discordMember

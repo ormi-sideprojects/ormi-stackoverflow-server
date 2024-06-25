@@ -8,7 +8,7 @@ import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Component;
 
 @Component
-public class DiscordLibraryInitializer<T extends Event> {
+public final class DiscordLibraryInitializer<T extends Event> {
 
   private final List<DiscordListener<T>> discordEventListeners;
   private final GatewayDiscordClient discordClient;

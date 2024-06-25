@@ -6,7 +6,7 @@ import org.ormi.stackorflow.infra.message.DiscordUserJpaRepository;
 import org.springframework.stereotype.Component;
 
 @Component
-public class DiscordUserProcessor {
+public final class DiscordUserProcessor {
 
   private final DiscordUserJpaRepository discordUserJpaRepository;
 

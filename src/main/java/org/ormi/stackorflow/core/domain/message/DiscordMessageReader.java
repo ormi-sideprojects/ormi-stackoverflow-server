@@ -4,7 +4,7 @@ import java.util.List;
 import org.springframework.stereotype.Component;
 
 @Component
-public class DiscordMessageReader {
+public final class DiscordMessageReader {
 
   private final DiscordMessageRepository discordMessageRepository;
 

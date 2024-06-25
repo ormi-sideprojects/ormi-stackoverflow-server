@@ -7,7 +7,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 @Getter
 @Setter
 @ConfigurationProperties(prefix = "discord")
-public class DiscordBotToken {
+public final class DiscordBotToken {
 
   private String botToken;
 }
