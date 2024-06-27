@@ -7,7 +7,8 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import org.modelmapper.ModelMapper;
 import org.ormi.stackorflow.domain.notification.dto.NotificationResponse;
-import org.ormi.stackorflow.domain.socket.controller.WebSocketGateway;
+//import org.ormi.stackorflow.domain.socket.controller.WebSocketGateway;
+import org.ormi.stackorflow.infra.notification.NotificationEntity;
 import org.ormi.stackorflow.infra.notification.NotificationRepository;
 import org.springframework.stereotype.Service;
 
@@ -22,7 +23,7 @@ public class NotificationService {
 
     // 실시간 활동 알림 생성
     public void createRealTimeActivityNotification(UUID senderId, long articleId, String staffNickname) {
-        NotificationResponse dto = NotificationResponse.builder()
+        NotificationEntity dto = NotificationEntity.builder()
                 .senderId(senderId)
                 .receiverId(null)
                 .message(staffNickname + "님이 새로운 글을 올렸어요!")
@@ -36,7 +37,7 @@ public class NotificationService {
 
     // 내 질문에 대한 댓글 알림 생성
     public void createMyArticleCommentNotification(UUID senderId, UUID receiverId, long commentId, String staffNickname) {
-        NotificationResponse dto = NotificationResponse.builder()
+        NotificationEntity dto = NotificationEntity.builder()
                 .senderId(senderId)
                 .receiverId(receiverId)
                 .message("당신의 질문에 " + staffNickname + "님이 답변했습니다.")
@@ -51,12 +52,12 @@ public class NotificationService {
     }
 
     // 내 질문에 대한 댓글 알림 조회
-    public List<NotificationResponse> findMyArticleNotifications(UUID receiverId) {
+    public List<NotificationEntity> findMyArticleNotifications(UUID receiverId) {
         return notificationRepository.findByReceiverId(receiverId);
     }
 
     // 내 질문에 대한 댓글 알림 저장
-    public void saveMyArticleCommentNotification(NotificationResponse dto) {
+    public void saveMyArticleCommentNotification(NotificationEntity dto) {
         notificationRepository.save(dto);
     }
 }

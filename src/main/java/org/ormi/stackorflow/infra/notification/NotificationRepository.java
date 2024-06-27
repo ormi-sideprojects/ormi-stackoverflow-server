@@ -18,19 +18,17 @@ public class NotificationRepository {
         this.modelMapper = modelMapper;
     }
 
-    public void save(NotificationResponse notificationResponse) {
-        NotificationEntity notificationEntity = modelMapper.map(notificationResponse, NotificationEntity.class);
+    public void save(NotificationEntity dto) {
 
-        notificationJpaRepository.save(notificationEntity);
+        notificationJpaRepository.save(dto);
     }
 
-    public List<NotificationResponse> findByReceiverId(UUID receiverId) {
+    public List<NotificationEntity> findByReceiverId(UUID receiverId) {
 
-        List<NotificationEntity> notificationEntities =
-                notificationJpaRepository.findByReceiverId(receiverId);
+        return notificationJpaRepository.findByReceiverId(receiverId);
 
-        return notificationEntities.stream()
-                .map(data -> modelMapper.map(data, NotificationResponse.class))
-                .collect(Collectors.toList());
+//        return notificationEntities.stream()
+//                .map(data -> modelMapper.map(data, NotificationResponse.class))
+//                .collect(Collectors.toList());
     }
 }
