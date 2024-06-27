@@ -2,6 +2,7 @@ package org.ormi.stackorflow.core.domain.member;
 
 
 import jakarta.transaction.Transactional;
+import java.util.Optional;
 import lombok.RequiredArgsConstructor;
 import org.ormi.stackorflow.core.domain.common.RoleType;
 import org.ormi.stackorflow.core.domain.common.exception.ResourceNotFoundException;
@@ -15,16 +16,16 @@ public class MemberService {
 
 	private final MemberRepository memberRepository;
 
-	@Transactional
 	public MemberEntity findOrCreateMember(String cookieValue) {
+		Optional<MemberEntity> memberEntityOptional = memberRepository.findById(cookieValue);
 
-		return memberRepository.findById(cookieValue).orElseGet(() -> {
-			MemberCreate memberCreate = MemberCreate.builder()
-				.id(cookieValue)
-				.role(RoleType.ANONYMOUS)
-				.build();
-			return memberRepository.save(memberCreate.toEntity());
-		});
+		if (memberEntityOptional.isPresent()) {
+			return memberEntityOptional.get();
+		}
+
+		MemberCreate memberCreate = MemberCreate.anonymous(cookieValue);
+
+		return memberRepository.save(memberCreate.toEntity());
 	}
 
 }

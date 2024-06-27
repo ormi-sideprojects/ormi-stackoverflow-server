@@ -15,10 +15,15 @@ public class MemberCreate {
 
 	public MemberEntity toEntity() {
 		MemberEntity memberEntity = new MemberEntity();
-		memberEntity.setId(this.id);
-		memberEntity.setRole(this.role);
 
-		return memberEntity;
+		return memberEntity.create(this);
+	}
+
+	public static MemberCreate anonymous(String cookieValue) {
+		return MemberCreate.builder()
+			.id(cookieValue)
+			.role(RoleType.ANONYMOUS)
+			.build();
 	}
 }
 

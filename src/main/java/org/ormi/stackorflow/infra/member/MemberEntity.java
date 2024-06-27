@@ -13,6 +13,7 @@ import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
 import org.ormi.stackorflow.core.domain.common.RoleType;
+import org.ormi.stackorflow.core.domain.member.MemberCreate;
 import org.ormi.stackorflow.infra.staff.StaffEntity;
 
 @Entity
@@ -34,6 +35,13 @@ public class MemberEntity {
 
 	public void updateRole(RoleType role) {
 		this.role = role;
+	}
+
+	public MemberEntity create(MemberCreate memberCreate) {
+		this.id = memberCreate.getId();
+		this.role = memberCreate.getRole();
+
+		return this;
 	}
 }
 
