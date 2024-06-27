@@ -9,8 +9,9 @@ import org.ormi.stackorflow.core.domain.common.RoleType;
 public class StaffResponse {
 
 	private int id;
-	private Long memberId;
+	private String memberId;
 	private String code;
 	private String nickname;
 	private RoleType staffRole;
 }
+

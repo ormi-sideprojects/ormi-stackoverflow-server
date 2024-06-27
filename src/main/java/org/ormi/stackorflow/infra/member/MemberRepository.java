@@ -7,6 +7,6 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface MemberRepository extends JpaRepository<MemberEntity, Long> {
 
-	Optional<MemberEntity> findBySessionId(String sessionId);
+	Optional<MemberEntity> findById(String cookieValue);
 
 }
