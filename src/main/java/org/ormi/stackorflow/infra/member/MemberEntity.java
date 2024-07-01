@@ -11,7 +11,7 @@ import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
-import org.ormi.stackorflow.core.domain.common.RoleType;
+import org.ormi.stackorflow.core.domain.common.auth.RoleType;
 import org.ormi.stackorflow.infra.staff.StaffEntity;
 
 @Entity

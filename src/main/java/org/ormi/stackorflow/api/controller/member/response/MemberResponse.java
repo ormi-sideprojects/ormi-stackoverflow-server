@@ -2,7 +2,7 @@ package org.ormi.stackorflow.api.controller.member.response;
 
 import lombok.Getter;
 import lombok.Setter;
-import org.ormi.stackorflow.core.domain.common.RoleType;
+import org.ormi.stackorflow.core.domain.common.auth.RoleType;
 
 @Getter
 @Setter

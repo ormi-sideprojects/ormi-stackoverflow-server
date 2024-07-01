@@ -1,4 +1,4 @@
-package org.ormi.stackorflow.core.domain.common;
+package org.ormi.stackorflow.core.domain.common.filter;
 
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;

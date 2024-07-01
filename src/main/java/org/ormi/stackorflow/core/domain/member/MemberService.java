@@ -3,7 +3,7 @@ package org.ormi.stackorflow.core.domain.member;
 
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
-import org.ormi.stackorflow.core.domain.common.RoleType;
+import org.ormi.stackorflow.core.domain.common.auth.RoleType;
 import org.ormi.stackorflow.core.domain.common.exception.ResourceNotFoundException;
 import org.ormi.stackorflow.infra.member.MemberEntity;
 import org.ormi.stackorflow.infra.member.MemberRepository;
