@@ -8,6 +8,7 @@ import org.springframework.context.annotation.Configuration;
 
 @Configuration
 public class QueryDslConfiguration {
+
   @Bean
   public JPAQueryFactory jpaQueryFactory(EntityManager entityManager) {
     return new JPAQueryFactory(JPQLTemplates.DEFAULT, entityManager);
