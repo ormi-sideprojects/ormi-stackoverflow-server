@@ -26,9 +26,5 @@ public class NotificationRepository {
     public List<NotificationEntity> findByReceiverId(UUID receiverId) {
 
         return notificationJpaRepository.findByReceiverId(receiverId);
-
-//        return notificationEntities.stream()
-//                .map(data -> modelMapper.map(data, NotificationResponse.class))
-//                .collect(Collectors.toList());
     }
 }
