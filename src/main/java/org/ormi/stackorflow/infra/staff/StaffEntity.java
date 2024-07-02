@@ -4,6 +4,7 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -17,7 +18,6 @@ import org.ormi.stackorflow.infra.member.MemberEntity;
 
 @Entity
 @Getter
-@Setter
 @Table(name = "staffs")
 public class StaffEntity {
 
@@ -26,7 +26,7 @@ public class StaffEntity {
 	@Column(name = "staff_id")
 	private int id;
 
-	@OneToOne
+	@OneToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "member_id")
 	private MemberEntity memberEntity;
 
@@ -40,8 +40,9 @@ public class StaffEntity {
 	@Column(name = "staff_role")
 	private RoleType staffRole;
 
-
-	public void updateMemberRole() {
-		this.memberEntity.setRole(RoleType.STAFF);
+	// --연관관계 편의 메소드-- //
+	public void setMemberEntity(MemberEntity memberEntity) {
+		this.memberEntity = memberEntity;
+		memberEntity.updateRole(RoleType.STAFF);
 	}
 }
