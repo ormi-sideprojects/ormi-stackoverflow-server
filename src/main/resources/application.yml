@@ -2,15 +2,18 @@ spring:
   application:
     name: stackorflow
   jpa:
+    show-sql: true
     open-in-view: false
     hibernate:
       ddl-auto: update
   datasource:
-    url: jdbc:h2:mem:test
+    driver-class-name: org.h2.Driver
+    url: jdbc:h2:mem:test   # H2 DB 연결 주소 (In-Memory Mode)
   h2:
-    console:
-      enabled: true
-      path: /h2-console
+    console: # H2 DB를 웹에서 관리할 수 있는 기능
+      enabled: true           # H2 Console 사용 여부
+      path: /h2-console       # H2 Console 접속 주소
+
 springdoc:
   swagger-ui:
     use-root-path: true

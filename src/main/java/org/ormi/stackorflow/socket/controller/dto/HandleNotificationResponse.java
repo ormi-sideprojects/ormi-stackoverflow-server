@@ -3,6 +3,7 @@ package org.ormi.stackorflow.socket.controller.dto;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import java.time.ZonedDateTime;
 import java.util.Optional;
+import java.util.UUID;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -11,8 +12,8 @@ import lombok.Setter;
 public class HandleNotificationResponse {
 
   long id;
-  Optional<String> receiverId;
-  String senderId;
+  Optional<UUID> receiverId;
+  UUID senderId;
   long target; // original article id
   String domain; // comment or article
   String message;

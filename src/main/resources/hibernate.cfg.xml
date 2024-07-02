@@ -1,0 +1,7 @@
+<hibernate-configuration>
+    <session-factory>
+        <!-- Other configurations -->
+        <property name="hibernate.cache.use_second_level_cache">false</property>
+        <property name="hibernate.cache.use_query_cache">false</property>
+    </session-factory>
+</hibernate-configuration>

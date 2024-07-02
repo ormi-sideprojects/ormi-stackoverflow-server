@@ -1,6 +1,7 @@
 package org.ormi.stackorflow.socket.controller;
 
 import lombok.RequiredArgsConstructor;
+import org.ormi.stackorflow.infra.notification.NotificationEntity;
 import org.ormi.stackorflow.socket.controller.dto.HandleArticleResponse;
 import org.ormi.stackorflow.socket.controller.dto.HandleCommentResponse;
 import org.ormi.stackorflow.socket.controller.dto.HandleNotificationResponse;
@@ -29,11 +30,11 @@ public class WebSocketGateway {
   }
 
   // 알림 응답 이벤트
-  public void handleNotification(HandleNotificationResponse dto) {
-    if(dto.getReceiverId().isEmpty()) {
+  public void handleNotification(NotificationEntity dto) {
+    if(dto.getReceiverId() == null) {
       simpMessageSendingOperations.convertAndSend("/sub/notifications", dto);
     } else {
-      simpMessageSendingOperations.convertAndSend("/sub/notifications/" + dto.getReceiverId().get(), dto);
+      simpMessageSendingOperations.convertAndSend("/sub/notifications/" + dto.getReceiverId(), dto);
     }
 
   }
