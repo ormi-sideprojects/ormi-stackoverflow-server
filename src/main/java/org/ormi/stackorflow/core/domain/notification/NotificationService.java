@@ -1,4 +1,4 @@
-package org.ormi.stackorflow.domain.notification.service;
+package org.ormi.stackorflow.core.domain.notification;
 
 import java.time.ZonedDateTime;
 import java.util.List;
@@ -6,7 +6,6 @@ import java.util.UUID;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import org.modelmapper.ModelMapper;
-import org.ormi.stackorflow.domain.notification.dto.NotificationResponse;
 //import org.ormi.stackorflow.domain.socket.controller.WebSocketGateway;
 import org.ormi.stackorflow.infra.notification.NotificationEntity;
 import org.ormi.stackorflow.infra.notification.NotificationRepository;

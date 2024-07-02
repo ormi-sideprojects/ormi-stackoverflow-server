@@ -2,9 +2,7 @@ package org.ormi.stackorflow.infra.notification;
 
 import java.util.List;
 import java.util.UUID;
-import java.util.stream.Collectors;
 import org.modelmapper.ModelMapper;
-import org.ormi.stackorflow.domain.notification.dto.NotificationResponse;
 import org.springframework.stereotype.Repository;
 
 @Repository
