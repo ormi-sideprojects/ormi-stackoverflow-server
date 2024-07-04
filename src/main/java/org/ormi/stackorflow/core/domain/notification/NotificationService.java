@@ -1,4 +1,4 @@
-package org.ormi.stackorflow.domain.notification.service;
+package org.ormi.stackorflow.core.domain.notification;
 
 import java.time.ZonedDateTime;
 import java.util.List;

@@ -1,4 +1,4 @@
-package org.ormi.stackorflow.domain.notification.dto;
+package org.ormi.stackorflow.api.controller.notification;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import java.time.ZonedDateTime;

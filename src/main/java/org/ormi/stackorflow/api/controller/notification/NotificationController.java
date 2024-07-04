@@ -1,12 +1,11 @@
-package org.ormi.stackorflow.domain.notification.controller;
+package org.ormi.stackorflow.api.controller.notification;
 
 import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
 import org.modelmapper.ModelMapper;
 import lombok.RequiredArgsConstructor;
-import org.ormi.stackorflow.domain.notification.dto.NotificationResponse;
-import org.ormi.stackorflow.domain.notification.service.NotificationService;
+import org.ormi.stackorflow.core.domain.notification.NotificationService;
 import org.ormi.stackorflow.infra.common.Responses;
 import org.ormi.stackorflow.infra.notification.NotificationEntity;
 import org.springframework.beans.factory.annotation.Autowired;
